@@ -1,5 +1,5 @@
 import './App.css'
-import Chip from "./components/chip.tsx";
+import Chip from "./components/chip";
 
 function App() {
   return (

@@ -17,5 +17,5 @@ html, body, #root {
 #root {
   display: grid;
   place-items: center;
-  background-color: var(--red-500);
+  background-color: hsl(var(--red-500));
 }
