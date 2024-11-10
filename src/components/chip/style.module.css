@@ -5,7 +5,7 @@
     gap: 8px;
     justify-content: center;
     align-items: center;
-    background-color: hsla(var(--red-100) 15%);
+    background-color: hsl(var(--red-100) / 15%);
     font-weight: 500;
     color: hsl(var(--red-900));
     font-size: 24px;
