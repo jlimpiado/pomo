@@ -1,0 +1,7 @@
+.timer_container {
+    font-size: 256px;
+    line-height: 85%;
+    color: hsl(var(--red-900));
+    font-weight: 200;
+    font-stretch: 125%;
+}

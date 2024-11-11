@@ -1,10 +1,14 @@
 import './App.css'
-import Chip from "./components/chip";
+import Chip from "@/components/chip";
+import Timer from "@/components/timer";
+import Controller from "@/components/controller";
 
 function App() {
   return (
-    <main>
+    <main className="App">
         <Chip />
+        <Timer />
+        <Controller />
     </main>
   )
 }

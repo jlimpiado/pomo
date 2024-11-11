@@ -1,0 +1,25 @@
+.controller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.controller > button > svg {
+    width: 32px;
+    height: 32px;
+}
+
+.secondary {
+    aspect-ratio: 1;
+    width: 80px;
+    background-color: hsl(var(--red-100) / 15%);
+    border-radius: 24px;
+}
+
+.primary {
+    width: 128px;
+    height: 96px;
+    background-color: hsl(var(--red-100) / 71%);
+    border-radius: 32px;
+}
