@@ -2,10 +2,12 @@ import {FC} from 'react';
 import {ProviderChildProps} from "../types.ts";
 import ThemeProvider from "./themeProvider.tsx";
 import UserProvider from "./userProvider.tsx";
+import TimerProvider from "./timerContext.tsx";
 
 const providers = [
     ThemeProvider,
-    UserProvider
+    UserProvider,
+    TimerProvider,
 ]
 
 const RootProvider: FC<ProviderChildProps> = ({children}) => {

@@ -4,9 +4,16 @@ export type ProviderChildProps = {
     children: React.ReactNode;
 }
 
-export type UserState = "Focus" | "Short break" | "Long break"
+export type UserStateType = "Focus" | "Short break" | "Long break"
 
 export type UserContextType = {
-    state: UserState;
-    handleSetUserState: (state: UserState) => void;
+    state: UserStateType;
+    handleSetUserState: (state: UserStateType) => void;
+}
+
+export type TimerStateType = "STOP" | "START" | "PAUSE";
+
+export type TimerContextType = {
+    state: TimerStateType;
+    handleSetTimerState: (state: TimerStateType) => void;
 }

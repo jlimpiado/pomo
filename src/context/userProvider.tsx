@@ -1,5 +1,5 @@
 import {createContext, FC, useContext, useState} from "react";
-import {ProviderChildProps, UserContextType, UserState} from "../types.ts";
+import {ProviderChildProps, UserContextType, UserStateType} from "../types.ts";
 
 const defaultValue: UserContextType = {
     state: "Focus",
@@ -12,9 +12,9 @@ const UserContext = createContext(defaultValue);
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider: FC<ProviderChildProps> = ({ children }) => {
-    const [currentState, setCurrentState] = useState<UserState>("Focus")
+    const [currentState, setCurrentState] = useState<UserStateType>("Focus")
 
-    const handleSetUserState = (state: UserState) => {
+    const handleSetUserState = (state: UserStateType) => {
         setCurrentState(state)
     }
 
