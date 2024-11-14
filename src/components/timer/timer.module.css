@@ -3,5 +3,12 @@
     line-height: 85%;
     color: hsl(var(--red-900));
     font-weight: 200;
-    font-stretch: 125%;
+    font-stretch: 110%;
+    transition: font-weight .5s ease-in,
+                font-stretch .5s ease-in;
+
+    &.active_timer {
+        font-weight: 800;
+        font-stretch: 100%;
+    }
 }
