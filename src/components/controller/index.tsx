@@ -10,20 +10,20 @@ const Controller = () => {
     return (
         <div className={styles.controller}>
             <button className={styles.secondary}>
-                <ThreeDots />
+                <ThreeDots/>
             </button>
             <button className={styles.primary} onClick={() => {
-                if(state === 'START') handleSetTimerState('STOP');
+                if (state === 'START') handleSetTimerState('PAUSE');
                 else handleSetTimerState("START");
             }}>
                 {
-                    state === "STOP" ?
-                        <PlayIcon />
-                       : <PauseIcon/>
+                    state !== "START" ?
+                        <PlayIcon/>
+                        : <PauseIcon/>
                 }
             </button>
             <button className={styles.secondary}>
-                <FastForward />
+                <FastForward/>
             </button>
         </div>
     )

@@ -16,4 +16,6 @@ export type TimerStateType = "STOP" | "START" | "PAUSE";
 export type TimerContextType = {
     state: TimerStateType;
     handleSetTimerState: (state: TimerStateType) => void;
+    currentTime: number;
+    setCurrentTime: (time: number) => void;
 }
