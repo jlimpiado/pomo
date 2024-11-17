@@ -1,7 +1,6 @@
 .timer_container {
     font-size: 256px;
     line-height: 85%;
-    color: hsl(var(--red-900));
     font-weight: 200;
     font-stretch: 110%;
     transition: font-weight .5s ease-in,
@@ -11,4 +10,16 @@
         font-weight: 800;
         font-stretch: 100%;
     }
+}
+
+[data-state="Focus"] .timer_container {
+    color: hsl(var(--red-900));
+}
+
+[data-state="Short break"] .timer_container {
+    color: hsl(var(--green-900));
+}
+
+[data-state="Long break"] .timer_container {
+    color: hsl(var(--blue-900));
 }

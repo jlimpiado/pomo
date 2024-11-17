@@ -1,14 +1,52 @@
 .chip {
-    width: 136px;
     height: 48px;
     display: flex;
     gap: 8px;
     justify-content: center;
     align-items: center;
-    background-color: hsl(var(--red-100) / 15%);
+    padding: 10px 16px;
     font-weight: 500;
-    color: hsl(var(--red-900));
     font-size: 24px;
-    border: 2px solid hsl(var(--red-900));
     border-radius: 25px;
+    /*transition: width 0.5s ease-in;*/
+    border: 2px solid;
+    text-wrap: nowrap;
+}
+
+.chip svg {
+    width: 32px;
+    height: 32px;
+}
+
+[data-state="Focus"] .chip {
+    width: 136px;
+    background-color: hsla(var(--alpha-red-100));
+    color: hsl(var(--red-900));
+    border-color: hsl(var(--red-900));
+}
+
+[data-state="Focus"] .chip > svg > path {
+    fill: hsl(var(--red-900));
+}
+
+[data-state="Short break"] .chip {
+    width: 195px;
+    background-color: hsla(var(--alpha-green-100));
+    color: hsl(var(--green-900));
+    border-color: hsl(var(--green-900));
+}
+
+[data-state="Short break"] .chip > svg > path {
+    fill: hsl(var(--green-900));
+}
+
+[data-state="Long break"] .chip {
+    width: 195px;
+    background-color: hsla(var(--alpha-blue-100));
+    color: hsl(var(--blue-900));
+    border-color: hsl(var(--blue-900));
+}
+
+[data-state="Long break"] .chip > svg > path {
+    fill: hsl(var(--blue-900));
 }

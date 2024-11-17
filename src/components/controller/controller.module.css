@@ -13,13 +13,34 @@
 .secondary {
     aspect-ratio: 1;
     width: 80px;
-    background-color: hsl(var(--red-100) / 15%);
     border-radius: 24px;
 }
 
 .primary {
     width: 128px;
     height: 96px;
-    background-color: hsl(var(--red-100) / 71%);
     border-radius: 32px;
+}
+
+[data-state="Focus"] .secondary {
+    background-color: hsla(var(--alpha-red-100));
+}
+
+[data-state="Focus"] .primary {
+    background-color: hsla(var(--alpha-red-700));
+}
+
+[data-state="Short break"] .secondary {
+    background-color: hsl(var(--alpha-green-100));
+}
+
+[data-state="Short break"] .primary {
+   background-color: hsl(var(--alpha-green-600));
+}
+
+[data-state="Long break"] .secondary {
+    background-color: hsl(var(--alpha-blue-100));
+}
+[data-state="Long break"] .primary {
+    background-color: hsl(var(--alpha-blue-600));
 }
