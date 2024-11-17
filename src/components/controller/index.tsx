@@ -4,9 +4,32 @@ import FastForward from '@/assets/icons/fast_forward.svg';
 import PauseIcon from '@/assets/icons/pause.svg';
 import styles from './controller.module.css';
 import {useTimerContext} from "@/context/timerContext.tsx";
+import {useUserContext} from "@/context/userProvider.tsx";
+import {useEffect} from "react";
 
 const Controller = () => {
-    const {state, handleSetTimerState} = useTimerContext();
+    const {state, handleSetTimerState, pomoTime, setCurrentTime} = useTimerContext();
+    const {state: userState,gotoNextState} = useUserContext();
+
+    const handleFastForward = () => {
+        gotoNextState();
+        handleSetTimerState('STOP')
+    }
+
+    useEffect(() => {
+        switch (userState) {
+            case "Focus":
+                setCurrentTime(pomoTime.focus)
+                break;
+            case "Short break":
+                setCurrentTime(pomoTime.short)
+                break;
+            case "Long break":
+                setCurrentTime(pomoTime.long)
+                break;
+        }
+    }, [pomoTime, setCurrentTime, userState]);
+
     return (
         <div className={styles.controller}>
             <button className={styles.secondary}>
@@ -22,7 +45,7 @@ const Controller = () => {
                         : <PauseIcon/>
                 }
             </button>
-            <button className={styles.secondary}>
+            <button className={styles.secondary} onClick={handleFastForward}>
                 <FastForward/>
             </button>
         </div>
