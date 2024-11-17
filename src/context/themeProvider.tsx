@@ -1,5 +1,5 @@
 import {createContext, FC, useContext, useState} from "react";
-import {ProviderChildProps} from "../types.ts";
+import {ProviderChildProps} from "@/types.ts";
 
 const defaultValue = {
     darkMode: false,

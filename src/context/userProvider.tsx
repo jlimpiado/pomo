@@ -1,27 +1,71 @@
-import {createContext, FC, useContext, useState} from "react";
+import {createContext, FC, useCallback, useContext, useEffect, useState} from "react";
 import {ProviderChildProps, UserContextType, UserStateType} from "../types.ts";
 
 const defaultValue: UserContextType = {
     state: "Focus",
-    handleSetUserState(state) {
-        console.log(state);
-    }
+    setUserStateHandler() {},
+    gotoNextState(){},
+    increasePomoLength(){},
+    decreasePomoLength(){},
+    setPomoLength(){}
 }
 const UserContext = createContext(defaultValue);
 
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider: FC<ProviderChildProps> = ({ children }) => {
-    const [currentState, setCurrentState] = useState<UserStateType>("Focus")
+    const [userState, setUserState] = useState<UserStateType>("Focus");
+    const [pomoLength, setPomoLength] = useState(() => 1);
+    const [pomoCount, setPomoCount] = useState(() => 0);
+
+    useEffect(() => {
+        if(userState === "Short break") {
+            setPomoCount(prev => prev + 1);
+        }
+
+        if(userState === "Long break") {
+            setPomoCount(0);
+        }
+    }, [userState]);
 
     const handleSetUserState = (state: UserStateType) => {
-        setCurrentState(state)
+        setUserState(state)
+    }
+
+    const gotoNextState = useCallback(() => {
+        setUserState(prev => {
+            if(prev === "Focus") {
+                if(pomoCount >= pomoLength) {
+                    return "Long break"
+                }
+                return "Short break"
+            }
+            return "Focus"
+        })
+    }, [pomoCount, pomoLength])
+
+    const increasePomoLength = () => {
+        setPomoLength(prev => prev +1);
+    }
+
+    const decreasePomoLength = () => {
+        setPomoLength(prev => {
+            const newLength = prev - 1;
+            if(newLength <= 0) {
+                return 1
+            }
+            return newLength
+        })
     }
 
     return (
         <UserContext.Provider value={{
-            state: currentState,
-            handleSetUserState
+            state: userState,
+            setUserStateHandler: handleSetUserState,
+            gotoNextState,
+            increasePomoLength,
+            decreasePomoLength,
+            setPomoLength
         }} >
             {children}
         </UserContext.Provider>

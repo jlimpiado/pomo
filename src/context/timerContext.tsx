@@ -1,11 +1,19 @@
 import {createContext, FC, useContext, useEffect, useRef, useState} from "react";
-import {ProviderChildProps, TimerContextType, TimerStateType} from "@/types.ts";
+import {PomoObjType, ProviderChildProps, TimerContextType, TimerStateType} from "@/types.ts";
+
+const defaultPomo = {
+    focus: 1500,
+    short: 300,
+    long: 900
+}
 
 const defaultValue: TimerContextType = {
     state: "STOP",
-    handleSetTimerState: (state) => console.log(state),
+    handleSetTimerState(){},
     currentTime: 0,
-    setCurrentTime: (time: number) => console.log(time),
+    setCurrentTime: () => {},
+    pomoTime: defaultPomo,
+    setPomoTime() {}
 }
 
 const TimerContext = createContext(defaultValue);
@@ -15,8 +23,9 @@ export const useTimerContext = () => useContext(TimerContext);
 const TimerProvider: FC<ProviderChildProps> = ({children}) => {
     const [timerState, setTimerState] = useState<TimerStateType>("STOP");
     // 25 * 60 = 25 minutes in seconds
-    const [currentTime, setCurrentTime] = useState(() => 1500);
+    const [currentTime, setCurrentTime] = useState(() => defaultPomo.focus);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    const [pomoTime, setPomoTime] = useState<PomoObjType>(defaultPomo)
 
     const handleSetTimerState = (state: TimerStateType) => {
         setTimerState(state)
@@ -40,6 +49,8 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
                 intervalRef.current = setInterval(startCountDown, 1000);
                 break;
             case "PAUSE":
+                if (intervalRef.current !== null) clearInterval(intervalRef.current);
+                break;
             case "STOP":
                 if (intervalRef.current !== null) clearInterval(intervalRef.current);
                 break;
@@ -51,7 +62,9 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
             state: timerState,
             handleSetTimerState,
             currentTime,
-            setCurrentTime
+            setCurrentTime,
+            pomoTime,
+            setPomoTime
         }}>
             {children}
         </TimerContext.Provider>
