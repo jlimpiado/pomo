@@ -8,7 +8,17 @@ export type UserStateType = "Focus" | "Short break" | "Long break"
 
 export type UserContextType = {
     state: UserStateType;
-    handleSetUserState: (state: UserStateType) => void;
+    setUserStateHandler: (state: UserStateType) => void;
+    gotoNextState: () => void;
+    increasePomoLength: () => void;
+    decreasePomoLength: () => void;
+    setPomoLength: (pomoLength: number) => void;
+}
+
+export type PomoObjType = {
+    focus: number,
+    short: number,
+    long: number,
 }
 
 export type TimerStateType = "STOP" | "START" | "PAUSE";
@@ -18,4 +28,6 @@ export type TimerContextType = {
     handleSetTimerState: (state: TimerStateType) => void;
     currentTime: number;
     setCurrentTime: (time: number) => void;
+    pomoTime: PomoObjType;
+    setPomoTime: (newPomoTime: PomoObjType) => void;
 }
