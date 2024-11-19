@@ -30,6 +30,10 @@
     background-color: hsla(var(--alpha-red-700));
 }
 
+[data-state="Focus"] .controller > button > svg > path {
+    fill: hsla(var(--red-900));
+}
+
 [data-state="Short break"] .secondary {
     background-color: hsl(var(--alpha-green-100));
 }
@@ -38,9 +42,17 @@
    background-color: hsl(var(--alpha-green-600));
 }
 
+[data-state="Short break"] .controller > button > svg > path {
+    fill: hsla(var(--green-900));
+}
+
 [data-state="Long break"] .secondary {
     background-color: hsl(var(--alpha-blue-100));
 }
 [data-state="Long break"] .primary {
     background-color: hsl(var(--alpha-blue-600));
+}
+
+[data-state="Long break"] .controller > button > svg > path {
+    fill: hsla(var(--blue-900));
 }
