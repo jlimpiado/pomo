@@ -16,12 +16,12 @@ html, body {
   font-size: 16px;
 }
 
-input, button, textarea, select {
-  font: inherit;
+button {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
 }
 
-button {
-  border: none;
-  background: none;
-  cursor: pointer;
+input, button, textarea, select {
+  font: inherit;
 }

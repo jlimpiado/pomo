@@ -6,8 +6,8 @@ import {formatTime} from "@/helpers.ts";
 import {useUserContext} from "@/context/userProvider.tsx";
 
 const Timer = () => {
-    const {state, currentTime} = useTimerContext();
-    const {gotoNextState} = useUserContext();
+    const {state, currentTime, pomoTime, setCurrentTime, handleSetTimerState} = useTimerContext();
+    const {state: userState, gotoNextState} = useUserContext();
     const [isRunning, setIsRunning] = useState(false);
     const [minutes, setMinutes] = useState(() => Math.floor(currentTime / 60));
     const [seconds, setSeconds] = useState(() => currentTime % 60);
@@ -37,11 +37,26 @@ const Timer = () => {
         }
     }, [currentTime, gotoNextState]);
 
+    const resetPomoTime = () => {
+        handleSetTimerState('STOP')
+        switch (userState) {
+            case "Focus":
+                setCurrentTime(pomoTime.focus)
+                break;
+            case "Short break":
+                setCurrentTime(pomoTime.short)
+                break;
+            case "Long break":
+                setCurrentTime(pomoTime.long)
+                break;
+        }
+    }
+
     return (
         <div className={clsx(styles.timer_container, {
             [styles.active_timer]: isRunning
         })}>
-            <p>{formatTime(minutes)}<br/>{formatTime(seconds)}</p>
+            <button onClick={resetPomoTime}>{formatTime(minutes)}<br/>{formatTime(seconds)}</button>
         </div>
     )
 }
