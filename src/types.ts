@@ -31,3 +31,8 @@ export type TimerContextType = {
     pomoTime: PomoObjType;
     setPomoTime: (newPomoTime: PomoObjType) => void;
 }
+
+export type MenuProps = {
+    isOpen: boolean;
+    toggleMenu: () => void;
+}

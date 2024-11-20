@@ -5,15 +5,21 @@ import PauseIcon from '@/assets/icons/pause.svg';
 import styles from './controller.module.css';
 import {useTimerContext} from "@/context/timerContext.tsx";
 import {useUserContext} from "@/context/userProvider.tsx";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import Menu from "@/components/menu";
 
 const Controller = () => {
     const {state, handleSetTimerState, pomoTime, setCurrentTime} = useTimerContext();
     const {state: userState,gotoNextState} = useUserContext();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleFastForward = () => {
         gotoNextState();
         handleSetTimerState('STOP')
+    }
+
+    const toggleMenu = () => {
+        setIsMenuOpen(prev => !prev);
     }
 
     useEffect(() => {
@@ -32,7 +38,8 @@ const Controller = () => {
 
     return (
         <div className={styles.controller}>
-            <button className={styles.secondary}>
+            <Menu isOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            <button className={styles.secondary} onClick={toggleMenu}>
                 <ThreeDots/>
             </button>
             <button className={styles.primary} onClick={() => {
