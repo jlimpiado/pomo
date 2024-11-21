@@ -1,4 +1,4 @@
-import React from "react";
+import React, {MutableRefObject} from "react";
 
 export type ProviderChildProps = {
     children: React.ReactNode;
@@ -34,5 +34,6 @@ export type TimerContextType = {
 
 export type MenuProps = {
     isOpen: boolean;
-    toggleMenu: () => void;
+    toggleMenu: (isOpen?:boolean) => void;
+    btnRef: MutableRefObject<HTMLButtonElement | null>;
 }

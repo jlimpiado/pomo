@@ -7,6 +7,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: hsl(var(--red-900));
+    padding: 8px 12px;
     background-color: hsl(var(--red-50));
     border-radius: 12px;
     border: 1px solid hsl(var(--alpha-black-50));
@@ -22,4 +24,31 @@
     height: 48px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.menu_item > section {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.menu_item > section > svg {
+    width: 24px;
+    height: 24px;
+}
+
+.key {
+    padding: 0 4px;
+    height: 14px;
+    font-size: 12px;
+    border: 1px solid hsl(var(--red-900));
+    border-radius: 4px;
+}
+
+.shortcut {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 50%;
 }
