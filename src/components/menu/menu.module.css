@@ -28,6 +28,11 @@
     cursor: pointer
 }
 
+.menu_item:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 .menu_item > .label {
     display: flex;
     gap: 8px;

@@ -34,7 +34,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 
     return (
         <div ref={menuRef} className={`${styles.menu_container}${isOpen ? ' ' + styles.open : ''}`}>
-            <button className={styles.menu_item}>
+            <button className={styles.menu_item} disabled>
                 <span className={styles.label}>
                     <ChartIcon /> Statistics
                 </span>
@@ -42,7 +42,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                     <span className={styles.key}>Ctrl</span>+<span className={styles.key}>S</span>
                 </span>
             </button>
-            <button className={styles.menu_item}>
+            <button className={styles.menu_item} disabled>
                 <span className={styles.label}>
                     <GearIcon /> Preferences
                 </span>
@@ -50,7 +50,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                     <span className={styles.key}>Ctrl</span>+<span className={styles.key}>P</span>
                 </span>
             </button>
-            <button className={styles.menu_item}>
+            <button className={styles.menu_item} disabled>
                 <span className={styles.label}>
                     <ReturnIcon /> Shortcuts
                 </span>
