@@ -34,30 +34,30 @@ const Menu: React.FC<MenuProps> = (props) => {
 
     return (
         <div ref={menuRef} className={`${styles.menu_container}${isOpen ? ' ' + styles.open : ''}`}>
-            <section className={styles.menu_item}>
-                <section>
+            <button className={styles.menu_item}>
+                <span className={styles.label}>
                     <ChartIcon /> Statistics
-                </section>
+                </span>
                 <span className={styles.shortcut}>
                     <span className={styles.key}>Ctrl</span>+<span className={styles.key}>S</span>
                 </span>
-            </section>
-            <section className={styles.menu_item}>
-                <section>
+            </button>
+            <button className={styles.menu_item}>
+                <span className={styles.label}>
                     <GearIcon /> Preferences
-                </section>
+                </span>
                 <span className={styles.shortcut}>
                     <span className={styles.key}>Ctrl</span>+<span className={styles.key}>P</span>
                 </span>
-            </section>
-            <section className={styles.menu_item}>
-                <section>
+            </button>
+            <button className={styles.menu_item}>
+                <span className={styles.label}>
                     <ReturnIcon /> Shortcuts
-                </section>
+                </span>
                 <span className={styles.shortcut}>
                     <span className={styles.key}>Ctrl</span>+<span className={styles.key}>K</span>
                 </span>
-            </section>
+            </button>
         </div>
     )
 }
