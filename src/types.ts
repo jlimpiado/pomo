@@ -45,4 +45,7 @@ export type MenuItemProps = {
     isDisabled?: boolean;
     onClick?: () => void;
 }
+
+export type PreferencesProps = {
+    toggleFn: (isOpen: boolean) => void;
 }
