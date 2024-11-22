@@ -3,7 +3,33 @@ import styles from './menu.module.css';
 import ChartIcon from '@/assets/icons/chart.svg'
 import GearIcon from '@/assets/icons/gear.svg'
 import ReturnIcon from '@/assets/icons/return.svg'
-import {MenuProps} from "@/types.ts";
+import {MenuItemProps, MenuProps} from "@/types.ts";
+
+const MenuItem = (props: MenuItemProps) => {
+    const {
+        icon,
+        text,
+        kbkeys
+    } = props;
+    return (
+        <button className={styles.menu_item}>
+                <span className={styles.label}>
+                    {icon} {text}
+                </span>
+            <span className={styles.shortcut}>
+                {
+                    kbkeys.length > 0 && (
+                        kbkeys.map((keys, idx) => (
+                            <>
+                                <span className={styles.key} key={keys}>{keys}</span>{idx === kbkeys.length - 1 ? '': '+'}
+                            </>
+                        ))
+                    )
+                }
+            </span>
+        </button>
+    )
+}
 
 const Menu: React.FC<MenuProps> = (props) => {
     const {
@@ -35,28 +61,13 @@ const Menu: React.FC<MenuProps> = (props) => {
     return (
         <div ref={menuRef} className={`${styles.menu_container}${isOpen ? ' ' + styles.open : ''}`}>
             <button className={styles.menu_item} disabled>
-                <span className={styles.label}>
-                    <ChartIcon /> Statistics
-                </span>
-                <span className={styles.shortcut}>
-                    <span className={styles.key}>Ctrl</span>+<span className={styles.key}>S</span>
-                </span>
+                <MenuItem icon={<ChartIcon />} text="Statistics" kbkeys={['Ctrl', 'S']} />
             </button>
             <button className={styles.menu_item} disabled>
-                <span className={styles.label}>
-                    <GearIcon /> Preferences
-                </span>
-                <span className={styles.shortcut}>
-                    <span className={styles.key}>Ctrl</span>+<span className={styles.key}>P</span>
-                </span>
+                <MenuItem icon={<GearIcon />} text="Preferences" kbkeys={['Ctrl', 'P']} />
             </button>
             <button className={styles.menu_item} disabled>
-                <span className={styles.label}>
-                    <ReturnIcon /> Shortcuts
-                </span>
-                <span className={styles.shortcut}>
-                    <span className={styles.key}>Ctrl</span>+<span className={styles.key}>K</span>
-                </span>
+                <MenuItem icon={<ReturnIcon />} text="Shortcuts" kbkeys={['Ctrl', 'K']} />
             </button>
         </div>
     )

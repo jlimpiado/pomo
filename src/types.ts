@@ -37,3 +37,9 @@ export type MenuProps = {
     toggleMenu: (isOpen?:boolean) => void;
     btnRef: MutableRefObject<HTMLButtonElement | null>;
 }
+
+export type MenuItemProps = {
+    icon: React.ReactNode;
+    text: string;
+    kbkeys: string[];
+}
