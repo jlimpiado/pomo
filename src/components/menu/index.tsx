@@ -1,18 +1,22 @@
-import React, { useEffect, useRef} from "react";
+import React, {Fragment, useEffect, useRef, useState} from "react";
 import styles from './menu.module.css';
 import ChartIcon from '@/assets/icons/chart.svg'
 import GearIcon from '@/assets/icons/gear.svg'
 import ReturnIcon from '@/assets/icons/return.svg'
 import {MenuItemProps, MenuProps} from "@/types.ts";
+import Preferences from "@/components/preferences/indext.tsx";
+import {createPortal} from "react-dom";
 
 const MenuItem = (props: MenuItemProps) => {
     const {
         icon,
         text,
-        kbkeys
+        kbkeys,
+        isDisabled = false,
+        onClick
     } = props;
     return (
-        <button className={styles.menu_item}>
+        <button className={styles.menu_item} disabled={isDisabled} onClick={onClick}>
                 <span className={styles.label}>
                     {icon} {text}
                 </span>
@@ -20,9 +24,9 @@ const MenuItem = (props: MenuItemProps) => {
                 {
                     kbkeys.length > 0 && (
                         kbkeys.map((keys, idx) => (
-                            <>
-                                <span className={styles.key} key={keys}>{keys}</span>{idx === kbkeys.length - 1 ? '': '+'}
-                            </>
+                            <Fragment key={keys + idx}>
+                                <span className={styles.key}>{keys}</span>{idx === kbkeys.length - 1 ? '' : '+'}
+                            </Fragment>
                         ))
                     )
                 }
@@ -38,6 +42,7 @@ const Menu: React.FC<MenuProps> = (props) => {
         btnRef
     } = props;
     const menuRef = useRef<HTMLDivElement>(null);
+    const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
 
     useEffect(() => {
         const handleClickedOutsite = (event: MouseEvent) => {
@@ -60,15 +65,23 @@ const Menu: React.FC<MenuProps> = (props) => {
 
     return (
         <div ref={menuRef} className={`${styles.menu_container}${isOpen ? ' ' + styles.open : ''}`}>
-            <button className={styles.menu_item} disabled>
-                <MenuItem icon={<ChartIcon />} text="Statistics" kbkeys={['Ctrl', 'S']} />
-            </button>
-            <button className={styles.menu_item} disabled>
-                <MenuItem icon={<GearIcon />} text="Preferences" kbkeys={['Ctrl', 'P']} />
-            </button>
-            <button className={styles.menu_item} disabled>
-                <MenuItem icon={<ReturnIcon />} text="Shortcuts" kbkeys={['Ctrl', 'K']} />
-            </button>
+            <MenuItem icon={<ChartIcon/>} text="Statistics" kbkeys={['Ctrl', 'S']} isDisabled />
+            <MenuItem
+                icon={<GearIcon/>}
+                text="Preferences"
+                kbkeys={['Ctrl', 'P']}
+                onClick={() => {
+                setIsPreferencesOpen(true);
+                    toggleMenu(false);
+                }}
+            />
+            {
+                isPreferencesOpen && createPortal(
+                    <Preferences toggleFn={() => setIsPreferencesOpen(false)} />,
+                    document.body
+                )
+            }
+            <MenuItem icon={<ReturnIcon/>} text="Shortcuts" kbkeys={['Ctrl', 'K']} isDisabled />
         </div>
     )
 }

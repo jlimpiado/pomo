@@ -42,4 +42,7 @@ export type MenuItemProps = {
     icon: React.ReactNode;
     text: string;
     kbkeys: string[];
+    isDisabled?: boolean;
+    onClick?: () => void;
+}
 }
