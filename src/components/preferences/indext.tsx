@@ -1,6 +1,7 @@
 import styles from './preferences.module.css';
 import {useEffect, useRef} from "react";
 import {PreferencesProps} from "@/types.ts";
+import CloseIcon from "@/assets/icons/close.svg";
 
 const Preferences = (props: PreferencesProps) => {
     const {
@@ -20,10 +21,14 @@ const Preferences = (props: PreferencesProps) => {
             document.removeEventListener('mousedown', handleClickOutside);
         }
     }, [toggleFn])
+
     return (
         <section ref={preferencesRef} className={styles.container}>
             <div className={styles.header}>
                 <h1>Settings</h1>
+                <button className={styles.close_btn} onClick={() => toggleFn(false)}>
+                    <CloseIcon />
+                </button>
             </div>
         </section>
     )

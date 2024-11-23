@@ -10,8 +10,22 @@
 }
 
 .header {
+    width: 447px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 24px;
+    color: hsl(var(--red-900));
+}
+
+.header > .close_btn {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+}
+
+.close_btn > svg {
+    width: 18px;
+    height: 18px
 }
