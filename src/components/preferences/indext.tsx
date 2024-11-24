@@ -2,6 +2,7 @@ import styles from './preferences.module.css';
 import {useEffect, useRef} from "react";
 import {PreferencesProps} from "@/types.ts";
 import CloseIcon from "@/assets/icons/close.svg";
+import {NumberInput, Switch} from "@/components/ui";
 
 const Preferences = (props: PreferencesProps) => {
     const {
@@ -29,6 +30,10 @@ const Preferences = (props: PreferencesProps) => {
                 <button className={styles.close_btn} onClick={() => toggleFn(false)}>
                     <CloseIcon />
                 </button>
+            </div>
+            <div>
+                <Switch defaultVal={false} onSwitch={(val) => console.log(val)}/>
+                <NumberInput />
             </div>
         </section>
     )

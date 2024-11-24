@@ -1,0 +1,11 @@
+.container {
+    width: 96px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    border: none;
+
+}
