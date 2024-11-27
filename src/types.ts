@@ -12,6 +12,7 @@ export type UserContextType = {
     gotoNextState: () => void;
     increasePomoLength: () => void;
     decreasePomoLength: () => void;
+    pomoLength: number;
     setPomoLength: (pomoLength: number) => void;
 }
 
@@ -29,7 +30,7 @@ export type TimerContextType = {
     currentTime: number;
     setCurrentTime: (time: number) => void;
     pomoTime: PomoObjType;
-    setPomoTime: (newPomoTime: PomoObjType) => void;
+    setPomo: (newPomoTime: number, type: keyof PomoObjType) => void;
 }
 
 export type MenuProps = {
@@ -49,6 +50,12 @@ export type MenuItemProps = {
 export type PreferencesProps = {
     toggleFn: (isOpen: boolean) => void;
 }
+
+export type NumberInputProps = {
+    defaultValue: number;
+    onChange: (value: number) => void;
+}
+
 type OnValueChangeType<T> = (value: T) => void;
 
 export type ItemLabelType = {

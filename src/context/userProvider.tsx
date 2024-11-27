@@ -7,6 +7,7 @@ const defaultValue: UserContextType = {
     gotoNextState(){},
     increasePomoLength(){},
     decreasePomoLength(){},
+    pomoLength: 0,
     setPomoLength(){}
 }
 const UserContext = createContext(defaultValue);
@@ -65,6 +66,7 @@ const UserProvider: FC<ProviderChildProps> = ({ children }) => {
             gotoNextState,
             increasePomoLength,
             decreasePomoLength,
+            pomoLength,
             setPomoLength
         }} >
             {children}

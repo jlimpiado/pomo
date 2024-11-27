@@ -13,7 +13,7 @@ const defaultValue: TimerContextType = {
     currentTime: 0,
     setCurrentTime: () => {},
     pomoTime: defaultPomo,
-    setPomoTime() {}
+    setPomo() {}
 }
 
 const TimerContext = createContext(defaultValue);
@@ -42,6 +42,10 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
         });
     }
 
+    const setPomo = (val: number, type: keyof typeof defaultPomo) => {
+        setPomoTime(prev => ({...prev, [type]: val}))
+    }
+
     useEffect(() => {
         switch (timerState) {
             case "START":
@@ -64,7 +68,7 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
             currentTime,
             setCurrentTime,
             pomoTime,
-            setPomoTime
+            setPomo
         }}>
             {children}
         </TimerContext.Provider>
