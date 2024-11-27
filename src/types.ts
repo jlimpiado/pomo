@@ -49,3 +49,12 @@ export type MenuItemProps = {
 export type PreferencesProps = {
     toggleFn: (isOpen: boolean) => void;
 }
+type OnValueChangeType<T> = (value: T) => void;
+
+export type ItemLabelType = {
+    label: string;
+}
+
+export type ItemPropsType =
+    | ItemLabelType & {itemType: 'switch'; defaultValue: boolean; onValueChange: OnValueChangeType<boolean> }
+    | ItemLabelType & {itemType: 'input'; defaultValue: number; onValueChange: OnValueChangeType<number> };
