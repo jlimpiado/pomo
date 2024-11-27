@@ -4,7 +4,7 @@ import ChartIcon from '@/assets/icons/chart.svg'
 import GearIcon from '@/assets/icons/gear.svg'
 import ReturnIcon from '@/assets/icons/return.svg'
 import {MenuItemProps, MenuProps} from "@/types.ts";
-import Preferences from "@/components/preferences/indext.tsx";
+import Preferences from "@/components/preferences";
 import {createPortal} from "react-dom";
 
 const MenuItem = (props: MenuItemProps) => {
