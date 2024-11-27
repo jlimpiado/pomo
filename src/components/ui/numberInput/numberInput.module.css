@@ -1,11 +1,50 @@
 .container {
+    --border-props: 1px solid hsl(var(--alpha-black-100));
+
     width: 96px;
     height: 40px;
     display: flex;
     align-items: center;
+    font-size: 16px;
+    border: var(--border-props);
+    border-radius: 8px;
 }
 
 .input {
     border: none;
+    background: none;
+    width: 100%;
+    color: hsl(var(--red-900));
+    text-align: center;
+}
 
+.input:focus-visible {
+    outline: none;
+}
+
+.input[type="number"]::-webkit-inner-spin-button,
+.input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    display: none;
+}
+
+.btn_down, .btn_up {
+    width: 30px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+
+}
+
+.btn_up {
+    border-left: var(--border-props);
+    border-bottom: var(--border-props);
+}
+
+.btn_down {
+    border-left: var(--border-props);
+}
+
+.btn_down > svg {
+    transform: rotate(180deg);
 }
