@@ -1,5 +1,5 @@
 import styles from './switch.module.css';
-import React, {useEffect, useState} from "react";
+import React  from "react";
 
 export type SwitchProps = {
     defaultVal?: boolean,
@@ -11,14 +11,11 @@ const Switch: React.FC<SwitchProps> = (props) => {
         defaultVal = false,
         onSwitch,
     } = props;
-    const [isChecked, setIsChecked] = useState(defaultVal);
-
-    useEffect(() => {
-        onSwitch(isChecked);
-    }, [onSwitch, isChecked]);
 
     return (
-        <button data-switch={isChecked} className={styles.switch} onClick={() => {setIsChecked(prev => !prev)}}>
+        <button data-switch={defaultVal} className={styles.switch} onClick={() => {
+            onSwitch(!defaultVal)
+        }}>
             <span className={styles.circle}></span>
         </button>
     )

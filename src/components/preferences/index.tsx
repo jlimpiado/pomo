@@ -1,11 +1,11 @@
 import styles from './preferences.module.css';
 import {useEffect, useRef} from "react";
-import {PreferencesProps} from "@/types.ts";
+import {PomoObjType, PreferencesProps} from "@/types.ts";
 import CloseIcon from "@/assets/icons/close.svg";
 import Item from "@/components/preferences/item.tsx";
 import {useTimerContext} from "@/context/timerContext.tsx";
 import {useUserContext} from "@/context/userProvider.tsx";
-import {getMinutes} from "@/helpers.ts";
+import {getMinutes, minutesToSeconds} from "@/helpers.ts";
 
 const Preferences = (props: PreferencesProps) => {
     const {
@@ -14,7 +14,7 @@ const Preferences = (props: PreferencesProps) => {
     const preferencesRef = useRef<HTMLDivElement>(null);
     const {
         pomoTime,
-        // setPomo
+        setPomo
     } = useTimerContext();
     const {pomoLength} = useUserContext();
 
@@ -31,6 +31,10 @@ const Preferences = (props: PreferencesProps) => {
         }
     }, [toggleFn])
 
+    const updatePomo = (newVal: number, type: keyof PomoObjType) => {
+        setPomo(minutesToSeconds(newVal), type);
+    }
+
     return (
         <section ref={preferencesRef} className={styles.container}>
             <div className={styles.header}>
@@ -41,10 +45,10 @@ const Preferences = (props: PreferencesProps) => {
             </div>
             <ul style={{listStyleType: 'none', padding: '0 0 16px'}}>
                 <Item label="Dark mode" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />
-                <Item label="Focus (minutes)" defaultValue={getMinutes(pomoTime.focus)} itemType="input" onValueChange={(val) => console.log(val)} />
+                <Item label="Focus (minutes)" defaultValue={getMinutes(pomoTime.focus)} itemType="input" onValueChange={(val) => updatePomo(val, "focus")} />
                 <Item label="Pomos" defaultValue={pomoLength} itemType="input" onValueChange={(val) => console.log(val)}/>
-                <Item label="Short break (minutes)" defaultValue={getMinutes(pomoTime.short)} itemType="input" onValueChange={(val) => console.log(val)}/>
-                <Item label="Long break (minutes)" defaultValue={getMinutes(pomoTime.long)} itemType="input" onValueChange={(val) => console.log(val)} />
+                <Item label="Short break (minutes)" defaultValue={getMinutes(pomoTime.short)} itemType="input" onValueChange={(val) => updatePomo(val, "short")} />
+                <Item label="Long break (minutes)" defaultValue={getMinutes(pomoTime.long)} itemType="input" onValueChange={(val) => updatePomo(val, "long")} />
                 <Item label="Auto resume" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />
                 <Item label="Sound" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />
                 <Item label="Notification" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />

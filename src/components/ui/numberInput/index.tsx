@@ -1,6 +1,6 @@
 import styles from './numberInput.module.css';
 import ArrowIcon from '@/assets/icons/arrow.svg';
-import {ChangeEvent, FC, useEffect, useState} from "react";
+import {ChangeEvent, FC} from "react";
 import {NumberInputProps} from "@/types.ts";
 
 const NumberInput: FC<NumberInputProps> = (props) => {
@@ -8,31 +8,23 @@ const NumberInput: FC<NumberInputProps> = (props) => {
         defaultValue,
         onChange
     } = props;
-    const [count, setCount] = useState(() => defaultValue);
-
     const incrementCount = () => {
-        setCount(prev => prev + 1);
+        onChange(defaultValue + 1);
     }
 
     const decrementCount = () => {
-        setCount(prev => {
-            const nextCount = prev - 1;
-            if(nextCount <= 0) return 0;
-            return nextCount;
-        });
+        let nextCount = defaultValue - 1;
+        if(nextCount <= 0) nextCount = 0
+        onChange(nextCount);
     }
 
     const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setCount(Number(event.target.value))
+        onChange(+event.target.value);
     }
-
-    useEffect(() => {
-        onChange(count)
-    }, [count, onChange]);
 
     return (
         <div className={styles.container}>
-            <input className={styles.input} type="number" value={count} onChange={handleOnChange}/>
+            <input className={styles.input} type="number" value={defaultValue} onChange={handleOnChange}/>
             <section>
                 <button className={styles.btn_up} onClick={incrementCount}>
                     <ArrowIcon />

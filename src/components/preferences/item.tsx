@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC} from "react";
 import {ItemPropsType} from "@/types.ts";
 import {NumberInput, Switch} from "@/components/ui";
 import styles from './item.module.css';
@@ -10,27 +10,19 @@ const Item: FC<ItemPropsType> = (props) => {
         defaultValue,
         onValueChange
     } = props;
-    const [itemValue, setItemValue] = useState(() => defaultValue);
-
     const handleSetItemNewValue = (newValue: number | boolean) => {
-        setItemValue(newValue);
+        if(itemType === 'switch') onValueChange(!!newValue);
+        else onValueChange(Number(newValue));
     }
-
-    useEffect(() => {
-        if(itemType === 'switch') {
-            onValueChange(!!itemValue);
-        } else onValueChange(Number(itemValue))
-
-    }, [itemType, onValueChange, itemValue]);
 
     return (
         <li className={styles.container}>
             <span>{label}</span>
             {
                 itemType === 'switch' ? (
-                    <Switch defaultVal={!!itemValue} onSwitch={handleSetItemNewValue} />
+                    <Switch defaultVal={!!defaultValue} onSwitch={handleSetItemNewValue} />
                 ) : (
-                    <NumberInput defaultValue={Number(itemValue)} onChange={handleSetItemNewValue} />
+                    <NumberInput defaultValue={Number(defaultValue)} onChange={handleSetItemNewValue} />
                 )
             }
         </li>
