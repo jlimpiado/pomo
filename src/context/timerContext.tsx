@@ -1,5 +1,6 @@
 import {createContext, FC, useContext, useEffect, useRef, useState} from "react";
 import {PomoObjType, ProviderChildProps, TimerContextType, TimerStateType} from "@/types.ts";
+import {getMinutes} from "@/helpers.ts";
 
 const defaultPomo = {
     focus: 1500,
@@ -43,7 +44,10 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
     }
 
     const setPomo = (val: number, type: keyof typeof defaultPomo) => {
-        setPomoTime(prev => ({...prev, [type]: val}))
+        setPomoTime(prev => {
+            if(getMinutes(val) > 60 || val === 0) return prev;
+            return ({...prev, [type]: val})
+        })
     }
 
     useEffect(() => {

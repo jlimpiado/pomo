@@ -78,7 +78,7 @@ const Menu: React.FC<MenuProps> = (props) => {
             {
                 isPreferencesOpen && createPortal(
                     <Preferences toggleFn={() => setIsPreferencesOpen(false)} />,
-                    document.body
+                    document.querySelector(".App")!
                 )
             }
             <MenuItem icon={<ReturnIcon/>} text="Shortcuts" kbkeys={['Ctrl', 'K']} isDisabled />
