@@ -1,6 +1,6 @@
 import styles from './preferences.module.css';
 import {useEffect, useRef} from "react";
-import {PomoObjType, PreferencesProps} from "@/types.ts";
+import {ItemPropsType, PomoObjType, PreferencesProps} from "@/types.ts";
 import CloseIcon from "@/assets/icons/close.svg";
 import Item from "@/components/preferences/item.tsx";
 import {useTimerContext} from "@/context/timerContext.tsx";
@@ -38,6 +38,60 @@ const Preferences = (props: PreferencesProps) => {
         setPomo(minutesToSeconds(newVal), type);
     }
 
+    const itemsArr: ItemPropsType[] = [
+        {
+            label: "Dark mode",
+            defaultValue: darkMode,
+            itemType: "switch",
+            onValueChange: (val: boolean) => toggleDarkMode(val),
+        },
+        {
+            label: "Focus (minutes)",
+            defaultValue: getMinutes(pomoTime.focus),
+            itemType: "input",
+            onValueChange: (val: number) => updatePomo(val, "focus"),
+        },
+        {
+            label: "Pomos",
+            defaultValue: pomoLength,
+            itemType: "input",
+            onValueChange: (val: number) => setPomoLength(val),
+        },
+        {
+            label: "Short break (minutes)",
+            defaultValue: getMinutes(pomoTime.short),
+            itemType: "input",
+            onValueChange: (val: number) => setPomo(val, "short"),
+        },
+        {
+            label: "Long break (minutes)",
+            defaultValue: getMinutes(pomoTime.long),
+            itemType: "input",
+            onValueChange: (val: number) => setPomo(val, "long"),
+        },
+        {
+            label: "Autoresume",
+            defaultValue: false,
+            itemType: "switch",
+            onValueChange: (val: boolean) => console.log(val),
+            isDisabled: true
+        },
+        {
+            label: "Sound",
+            defaultValue: false,
+            itemType: "switch",
+            onValueChange: (val: boolean) => console.log(val),
+            isDisabled: true
+        },
+        {
+            label: "Notifications",
+            defaultValue: false,
+            itemType: "switch",
+            onValueChange: (val: boolean) => console.log(val),
+            isDisabled: true
+        },
+    ]
+
     return (
         <section ref={preferencesRef} className={styles.container}>
             {createPortal(<span className={styles.backdrop}></span>, document.querySelector(".App")!)}
@@ -49,14 +103,9 @@ const Preferences = (props: PreferencesProps) => {
                 </button>
             </div>
             <ul style={{listStyleType: 'none', padding: '0 0 16px'}}>
-                <Item label="Dark mode" defaultValue={darkMode} itemType="switch" onValueChange={(val) => toggleDarkMode(val)} />
-                <Item label="Focus (minutes)" defaultValue={getMinutes(pomoTime.focus)} itemType="input" onValueChange={(val) => updatePomo(val, "focus")} />
-                <Item label="Pomos" defaultValue={pomoLength} itemType="input" onValueChange={(val) => setPomoLength(val)} />
-                <Item label="Short break (minutes)" defaultValue={getMinutes(pomoTime.short)} itemType="input" onValueChange={(val) => updatePomo(val, "short")} />
-                <Item label="Long break (minutes)" defaultValue={getMinutes(pomoTime.long)} itemType="input" onValueChange={(val) => updatePomo(val, "long")} />
-                <Item label="Auto resume" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />
-                <Item label="Sound" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />
-                <Item label="Notification" defaultValue={false} itemType="switch" onValueChange={(val) => console.log(val)} />
+                {itemsArr.map((item) => (
+                    <Item {...item} />
+                ))}
             </ul>
         </section>
     )

@@ -8,7 +8,8 @@ const Item: FC<ItemPropsType> = (props) => {
         label,
         itemType,
         defaultValue,
-        onValueChange
+        onValueChange,
+        isDisabled
     } = props;
     const handleSetItemNewValue = (newValue: number | boolean) => {
         if(itemType === 'switch') onValueChange(!!newValue);
@@ -16,7 +17,7 @@ const Item: FC<ItemPropsType> = (props) => {
     }
 
     return (
-        <li className={styles.container}>
+        <li className={styles.container} aria-disabled={isDisabled}>
             <span>{label}</span>
             {
                 itemType === 'switch' ? (

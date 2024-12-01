@@ -8,6 +8,11 @@
     color: hsl(var(--red-900))
 }
 
+.container[aria-disabled], .container[aria-disabled] > * {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 [data-state="Short break"] .container {
     color: hsl(var(--green-900))
 }

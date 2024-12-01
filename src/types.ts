@@ -65,6 +65,7 @@ type OnValueChangeType<T> = (value: T) => void;
 
 export type ItemLabelType = {
     label: string;
+    isDisabled?: boolean;
 }
 
 export type ItemPropsType =
