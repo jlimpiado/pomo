@@ -58,3 +58,70 @@
     gap: 2px;
     opacity: 50%;
 }
+
+[data-state="Short break"] .menu_container {
+    color: hsl(var(--green-900));
+    background-color: hsl(var(--green-50));
+}
+
+[data-state="Short break"] .key {
+    border-color: hsl(var(--green-900));
+}
+
+[data-state="Short break"] .menu_item > .label > svg > path {
+    fill: hsl(var(--green-900));
+}
+
+[data-state="Long break"] .menu_container {
+    color: hsl(var(--blue-900));
+    background-color: hsl(var(--blue-50));
+}
+
+[data-state="Long break"] .key {
+    border-color: hsl(var(--blue-900));
+}
+
+[data-state="Long break"] .menu_item > .label > svg > path {
+    fill: hsl(var(--blue-900));
+}
+
+/*DARK MODE STYLES*/
+[data-darkmode="true"] .menu_container {
+    border-color: hsl(var(--alpha-white-50));
+    color: hsl(var(--red-50));
+    background-color: hsl(var(--red-950));
+}
+
+[data-darkmode="true"] .key {
+    border-color: hsl(var(--red-50));
+}
+
+[data-darkmode="true"] .menu_item > .label > svg > path {
+    fill: hsl(var(--red-50))
+}
+
+[data-darkmode="true"][data-state="Short break"] .menu_container {
+    color: hsl(var(--green-50));
+    background-color: hsl(var(--green-950));
+}
+
+[data-darkmode="true"][data-state="Short break"] .key {
+    border-color: hsl(var(--green-50));
+}
+
+[data-darkmode="true"][data-state="Short break"] .menu_item > .label > svg > path {
+    fill: hsl(var(--green-50));
+}
+
+[data-darkmode="true"][data-state="Long break"] .menu_container {
+    color: hsl(var(--blue-50));
+    background-color: hsl(var(--blue-950));
+}
+
+[data-darkmode="true"][data-state="Long break"] .key {
+    border-color: hsl(var(--blue-50));
+}
+
+[data-darkmode="true"][data-state="Long break"] .menu_item > .label > svg > path {
+    fill: hsl(var(--blue-50));
+}

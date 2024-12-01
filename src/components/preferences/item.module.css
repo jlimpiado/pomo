@@ -7,3 +7,23 @@
     padding: 0 24px;
     color: hsl(var(--red-900))
 }
+
+[data-state="Short break"] .container {
+    color: hsl(var(--green-900))
+}
+
+[data-state="Long break"] .container {
+    color: hsl(var(--blue-900))
+}
+
+[data-darkmode="true"] .container {
+    color: hsl(var(--red-50))
+}
+
+[data-darkmode="true"][data-state="Short break"] .container {
+    color: hsl(var(--green-50))
+}
+
+[data-darkmode="true"][data-state="Long break"] .container {
+    color: hsl(var(--blue-50))
+}

@@ -1,4 +1,5 @@
 .container {
+    z-index: 1;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -28,4 +29,62 @@
 .close_btn > svg {
     width: 18px;
     height: 18px
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: hsl(var(--alpha-black-50))
+}
+
+[data-state="Short break"] .container {
+    background-color: hsl(var(--green-50));
+}
+
+[data-state="Short break"] .header {
+    color: hsl(var(--green-900));
+}
+
+[data-state="Long break"] .container {
+    background-color: hsl(var(--blue-50));
+}
+
+[data-state="Long break"] .header {
+    color: hsl(var(--blue-900));
+}
+
+/*DARK MODE*/
+[data-darkmode="true"] .container {
+    background-color: hsl(var(--red-950))
+}
+
+[data-darkmode="true"] .container svg > path {
+    fill: hsl(var(--red-50))
+}
+
+[data-darkmode="true"] .header {
+    color: hsl(var(--red-50))
+}
+
+[data-darkmode="true"] .backdrop {
+    background-color: hsl(var(--alpha-white-50));
+}
+
+[data-darkmode="true"][data-state="Short break"] .container {
+    background-color: hsl(var(--green-950))
+}
+
+[data-darkmode="true"][data-state="Short break"] .header {
+    color: hsl(var(--green-50))
+}
+
+[data-darkmode="true"][data-state="Long break"] .container {
+    background-color: hsl(var(--blue-950))
+}
+
+[data-darkmode="true"][data-state="Long break"] .header {
+    color: hsl(var(--blue-50))
 }

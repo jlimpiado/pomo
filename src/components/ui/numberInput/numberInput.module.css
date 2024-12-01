@@ -48,3 +48,42 @@
 .btn_down > svg {
     transform: rotate(180deg);
 }
+[data-state="Short break"] .container > section > button > svg > path {
+    fill: hsl(var(--green-900));
+}
+
+[data-state="Short break"] .input {
+    color: hsl(var(--green-900));
+}
+
+[data-state="Long break"] .container > section > button > svg > path {
+    fill: hsl(var(--blue-900));
+}
+
+[data-state="Long break"] .input {
+    color: hsl(var(--blue-900));
+}
+
+[data-darkmode="true"] .container {
+    --border-props: 1px solid hsl(var(--alpha-white-100));
+}
+
+[data-darkmode="true"] .input {
+    color: hsl(var(--red-50))
+}
+
+[data-darkmode="true"][data-state="Short break"] .container > section > button > svg > path {
+    fill: hsl(var(--green-50));
+}
+
+[data-darkmode="true"][data-state="Short break"] .input {
+    color: hsl(var(--green-50));
+}
+
+[data-darkmode="true"][data-state="Long break"] .container > section > button > svg > path {
+    fill: hsl(var(--blue-50));
+}
+
+[data-darkmode="true"][data-state="Long break"] .input {
+    color: hsl(var(--blue-50));
+}

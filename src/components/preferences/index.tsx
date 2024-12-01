@@ -7,6 +7,7 @@ import {useTimerContext} from "@/context/timerContext.tsx";
 import {useUserContext} from "@/context/userProvider.tsx";
 import {getMinutes, minutesToSeconds} from "@/helpers.ts";
 import {useThemeContext} from "@/context/themeProvider.tsx";
+import {createPortal} from "react-dom";
 
 const Preferences = (props: PreferencesProps) => {
     const {
@@ -39,6 +40,8 @@ const Preferences = (props: PreferencesProps) => {
 
     return (
         <section ref={preferencesRef} className={styles.container}>
+            {createPortal(<span className={styles.backdrop}></span>, document.querySelector(".App")!)}
+
             <div className={styles.header}>
                 <h1>Settings</h1>
                 <button className={styles.close_btn} onClick={() => toggleFn(false)}>

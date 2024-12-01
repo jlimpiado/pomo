@@ -8,6 +8,7 @@
     gap: 32px;
 }
 
+/*DEFAULT STYLES*/
 .App[data-state="Focus"] {
     background-color: hsl(var(--red-50));
 }
@@ -18,4 +19,17 @@
 
 .App[data-state="Long break"] {
     background-color: hsl(var(--blue-50));
+}
+
+/*DARK MODE STYLES*/
+.App[data-state="Focus"][data-darkmode="true"] {
+    background-color: hsl(var(--red-950));
+}
+
+.App[data-state="Short break"][data-darkmode="true"] {
+    background-color: hsl(var(--green-950));
+}
+
+.App[data-state="Long break"][data-darkmode="true"] {
+    background-color: hsl(var(--blue-950));
 }

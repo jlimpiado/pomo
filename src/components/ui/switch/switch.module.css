@@ -23,6 +23,26 @@
     background-color: hsl(var(--alpha-red-700));
 }
 
-.switch[data-switch="true"] > .circle {
+.switch[data-switch="true"] .circle {
     transform: translateX(calc(30px - 16px));
+}
+
+[data-state="Short break"] .circle {
+    background-color: hsl(var(--green-50))
+}
+
+[data-state="Short break"] .switch[data-switch="true"] {
+    background-color: hsl(var(--alpha-green-600))
+}
+
+[data-state="Long break"] .circle {
+    background-color: hsl(var(--blue-50))
+}
+
+[data-state="Long break"] .switch[data-switch="true"] {
+    background-color: hsl(var(--alpha-blue-600))
+}
+
+[data-darkmode="true"] .switch {
+    background-color: hsl(var(--alpha-white-200))
 }

@@ -4,6 +4,11 @@ export type ProviderChildProps = {
     children: React.ReactNode;
 }
 
+export type ThemeContextType = {
+    darkMode: boolean;
+    toggleDarkMode(val?: boolean): void;
+}
+
 export type UserStateType = "Focus" | "Short break" | "Long break"
 
 export type UserContextType = {

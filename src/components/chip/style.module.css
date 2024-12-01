@@ -50,3 +50,36 @@
 [data-state="Long break"] .chip > svg > path {
     fill: hsl(var(--blue-900));
 }
+
+[data-darkmode="true"][data-state="Focus"] .chip {
+    width: 136px;
+    background-color: hsla(var(--alpha-red-100));
+    color: hsl(var(--red-50));
+    border-color: hsl(var(--red-50));
+}
+
+[data-darkmode="true"][data-state="Focus"] .chip > svg > path {
+    fill: hsl(var(--red-50));
+}
+
+[data-darkmode="true"][data-state="Short break"] .chip {
+    width: 195px;
+    background-color: hsla(var(--alpha-green-100));
+    color: hsl(var(--green-50));
+    border-color: hsl(var(--green-50));
+}
+
+[data-darkmode="true"][data-state="Short break"] .chip > svg > path {
+    fill: hsl(var(--green-50));
+}
+
+[data-darkmode="true"][data-state="Long break"] .chip {
+    width: 195px;
+    background-color: hsla(var(--alpha-blue-100));
+    color: hsl(var(--blue-50));
+    border-color: hsl(var(--blue-50));
+}
+
+[data-darkmode="true"][data-state="Long break"] .chip > svg > path {
+    fill: hsl(var(--blue-50));
+}
