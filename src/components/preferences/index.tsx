@@ -103,8 +103,8 @@ const Preferences = (props: PreferencesProps) => {
                 </button>
             </div>
             <ul style={{listStyleType: 'none', padding: '0 0 16px'}}>
-                {itemsArr.map((item) => (
-                    <Item {...item} />
+                {itemsArr.map((item, idx) => (
+                    <Item key={item.itemType+"@"+item.defaultValue+"@"+idx} {...item} />
                 ))}
             </ul>
         </section>
