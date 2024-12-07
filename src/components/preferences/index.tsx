@@ -16,7 +16,9 @@ const Preferences = (props: PreferencesProps) => {
     const preferencesRef = useRef<HTMLDivElement>(null);
     const {
         pomoTime,
-        setPomo
+        setPomo,
+        isSoundEnabled,
+        setIsSoundEnabled
     } = useTimerContext();
     const {pomoLength, setPomoLength} = useUserContext();
     const {toggleDarkMode, darkMode} = useThemeContext();
@@ -78,10 +80,9 @@ const Preferences = (props: PreferencesProps) => {
         },
         {
             label: "Sound",
-            defaultValue: false,
+            defaultValue: isSoundEnabled,
             itemType: "switch",
-            onValueChange: (val: boolean) => console.log(val),
-            isDisabled: true
+            onValueChange: (val: boolean) => setIsSoundEnabled(val),
         },
         {
             label: "Notifications",

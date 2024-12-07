@@ -1,6 +1,7 @@
 import {createContext, FC, useContext, useEffect, useRef, useState} from "react";
 import {PomoObjType, ProviderChildProps, TimerContextType, TimerStateType} from "@/types.ts";
 import {getMinutes} from "@/helpers.ts";
+import alarmAudio from "@/assets/alarm-beep.wav";
 
 const defaultPomo = {
     focus: 1500,
@@ -11,10 +12,13 @@ const defaultPomo = {
 const defaultValue: TimerContextType = {
     state: "STOP",
     handleSetTimerState(){},
-    currentTime: 0,
+    currentTime: defaultPomo.focus,
     setCurrentTime: () => {},
     pomoTime: defaultPomo,
-    setPomo() {}
+    setPomo() {},
+    setCallbackFn(){},
+    isSoundEnabled: true,
+    setIsSoundEnabled: () => {},
 }
 
 const TimerContext = createContext(defaultValue);
@@ -22,11 +26,13 @@ const TimerContext = createContext(defaultValue);
 export const useTimerContext = () => useContext(TimerContext);
 
 const TimerProvider: FC<ProviderChildProps> = ({children}) => {
-    const [timerState, setTimerState] = useState<TimerStateType>("STOP");
+    const [timerState, setTimerState] = useState<TimerStateType>(defaultValue.state);
     // 25 * 60 = 25 minutes in seconds
-    const [currentTime, setCurrentTime] = useState(() => defaultPomo.focus);
+    const [currentTime, setCurrentTime] = useState(defaultValue.currentTime);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-    const [pomoTime, setPomoTime] = useState<PomoObjType>(defaultPomo)
+    const [pomoTime, setPomoTime] = useState<PomoObjType>(defaultValue.pomoTime)
+    const [callbackFn, setCallbackFn] = useState(() => function(){})
+    const [isSoundEnabled, setIsSoundEnabled] = useState(defaultValue.isSoundEnabled);
 
     const handleSetTimerState = (state: TimerStateType) => {
         setTimerState(state)
@@ -65,6 +71,27 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
         }
     }, [timerState])
 
+
+    useEffect(() => {
+        const playAlarm = () => {
+            const audio = new Audio(alarmAudio);
+            setTimeout(() => {
+                audio.pause(); // Pauses the audio
+                audio.currentTime = 0; // Resets playback to the beginning
+            }, 3000); // 3 seconds
+            if(!isSoundEnabled) return Promise.resolve()
+            return audio.play();
+        }
+
+        const timerEnded = () => {
+            playAlarm().then(() => callbackFn())
+        }
+
+        if(currentTime === 0) {
+            timerEnded()
+        }
+    }, [currentTime, isSoundEnabled, callbackFn]);
+
     return (
         <TimerContext.Provider value={{
             state: timerState,
@@ -72,7 +99,10 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
             currentTime,
             setCurrentTime,
             pomoTime,
-            setPomo
+            setPomo,
+            setCallbackFn,
+            isSoundEnabled,
+            setIsSoundEnabled
         }}>
             {children}
         </TimerContext.Provider>

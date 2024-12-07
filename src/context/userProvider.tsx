@@ -1,4 +1,4 @@
-import {createContext, FC, useCallback, useContext, useEffect, useState} from "react";
+import {createContext, FC, useContext, useEffect, useState} from "react";
 import {ProviderChildProps, UserContextType, UserStateType} from "../types.ts";
 
 const defaultValue: UserContextType = {
@@ -33,7 +33,7 @@ const UserProvider: FC<ProviderChildProps> = ({ children }) => {
         setUserState(state)
     }
 
-    const gotoNextState = useCallback(() => {
+    const gotoNextState = () => {
         setUserState(prev => {
             if(prev === "Focus") {
                 if(pomoCount >= pomoLength) {
@@ -43,7 +43,7 @@ const UserProvider: FC<ProviderChildProps> = ({ children }) => {
             }
             return "Focus"
         })
-    }, [pomoCount, pomoLength])
+    }
 
     const increasePomoLength = () => {
         setPomoLength(prev => prev +1);

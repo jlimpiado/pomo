@@ -1,4 +1,4 @@
-import React, {MutableRefObject} from "react";
+import React, {Dispatch, MutableRefObject, SetStateAction} from "react";
 
 export type ProviderChildProps = {
     children: React.ReactNode;
@@ -36,6 +36,9 @@ export type TimerContextType = {
     setCurrentTime: (time: number) => void;
     pomoTime: PomoObjType;
     setPomo: (newPomoTime: number, type: keyof PomoObjType) => void;
+    setCallbackFn: Dispatch<SetStateAction<() => void>>
+    isSoundEnabled: boolean;
+    setIsSoundEnabled: Dispatch<SetStateAction<boolean>>;
 }
 
 export type MenuProps = {

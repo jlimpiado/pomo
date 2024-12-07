@@ -6,11 +6,15 @@ import {formatTime} from "@/helpers.ts";
 import {useUserContext} from "@/context/userProvider.tsx";
 
 const Timer = () => {
-    const {state, currentTime, pomoTime, setCurrentTime, handleSetTimerState} = useTimerContext();
+    const {state, currentTime, pomoTime, setCurrentTime, handleSetTimerState, setCallbackFn} = useTimerContext();
     const {state: userState, gotoNextState} = useUserContext();
     const [isRunning, setIsRunning] = useState(false);
     const [minutes, setMinutes] = useState(() => Math.floor(currentTime / 60));
     const [seconds, setSeconds] = useState(() => currentTime % 60);
+
+    useEffect(() => {
+        setCallbackFn(() => gotoNextState);
+    }, [gotoNextState, setCallbackFn]);
 
     useEffect(() => {
         switch (state) {
@@ -31,10 +35,6 @@ const Timer = () => {
     useEffect(() => {
         setMinutes(Math.floor(currentTime / 60));
         setSeconds(currentTime % 60);
-
-        if(currentTime === 0) {
-            gotoNextState();
-        }
     }, [currentTime, gotoNextState]);
 
     const resetPomoTime = () => {
