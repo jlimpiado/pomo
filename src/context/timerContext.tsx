@@ -19,6 +19,8 @@ const defaultValue: TimerContextType = {
     setCallbackFn(){},
     isSoundEnabled: true,
     setIsSoundEnabled: () => {},
+    isAutoResume: false,
+    setIsAutoResume(){}
 }
 
 const TimerContext = createContext(defaultValue);
@@ -33,6 +35,7 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
     const [pomoTime, setPomoTime] = useState<PomoObjType>(defaultValue.pomoTime)
     const [callbackFn, setCallbackFn] = useState(() => function(){})
     const [isSoundEnabled, setIsSoundEnabled] = useState(defaultValue.isSoundEnabled);
+    const [isAutoResume, setIsAutoResume] = useState(defaultValue.isAutoResume);
 
     const handleSetTimerState = (state: TimerStateType) => {
         setTimerState(state)
@@ -69,7 +72,7 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
                 if (intervalRef.current !== null) clearInterval(intervalRef.current);
                 break;
         }
-    }, [timerState])
+    }, [timerState, isAutoResume])
 
 
     useEffect(() => {
@@ -84,13 +87,15 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
         }
 
         const timerEnded = () => {
-            playAlarm().then(() => callbackFn())
+            playAlarm().then(() => callbackFn()).then(() => {
+                if(isAutoResume) setTimerState('START')
+            })
         }
 
         if(currentTime === 0) {
             timerEnded()
         }
-    }, [currentTime, isSoundEnabled, callbackFn]);
+    }, [currentTime, isSoundEnabled, callbackFn, isAutoResume]);
 
     return (
         <TimerContext.Provider value={{
@@ -102,7 +107,9 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
             setPomo,
             setCallbackFn,
             isSoundEnabled,
-            setIsSoundEnabled
+            setIsSoundEnabled,
+            isAutoResume,
+            setIsAutoResume
         }}>
             {children}
         </TimerContext.Provider>

@@ -39,6 +39,8 @@ export type TimerContextType = {
     setCallbackFn: Dispatch<SetStateAction<() => void>>
     isSoundEnabled: boolean;
     setIsSoundEnabled: Dispatch<SetStateAction<boolean>>;
+    isAutoResume: boolean;
+    setIsAutoResume: Dispatch<SetStateAction<boolean>>;
 }
 
 export type MenuProps = {

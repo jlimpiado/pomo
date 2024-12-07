@@ -18,7 +18,9 @@ const Preferences = (props: PreferencesProps) => {
         pomoTime,
         setPomo,
         isSoundEnabled,
-        setIsSoundEnabled
+        setIsSoundEnabled,
+        isAutoResume,
+        setIsAutoResume
     } = useTimerContext();
     const {pomoLength, setPomoLength} = useUserContext();
     const {toggleDarkMode, darkMode} = useThemeContext();
@@ -73,10 +75,9 @@ const Preferences = (props: PreferencesProps) => {
         },
         {
             label: "Autoresume",
-            defaultValue: false,
+            defaultValue: isAutoResume,
             itemType: "switch",
-            onValueChange: (val: boolean) => console.log(val),
-            isDisabled: true
+            onValueChange: (val: boolean) => setIsAutoResume(val),
         },
         {
             label: "Sound",
