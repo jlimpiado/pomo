@@ -9,16 +9,22 @@ export type ThemeContextType = {
     toggleDarkMode(val?: boolean): void;
 }
 
-export type UserStateType = "Focus" | "Short break" | "Long break"
+export enum UserStateEnum {
+    FOCUS = "Focus",
+    SHORT_BREAK = "Short break",
+    LONG_BREAK = "Long break",
+}
 
 export type UserContextType = {
-    state: UserStateType;
-    setUserStateHandler: (state: UserStateType) => void;
+    state: UserStateEnum;
+    setUserStateHandler: (state: UserStateEnum) => void;
     gotoNextState: () => void;
     increasePomoLength: () => void;
     decreasePomoLength: () => void;
     pomoLength: number;
     setPomoLength: (pomoLength: number) => void;
+    isNotifEnabled: boolean;
+    requestNotifPermission: () => void;
 }
 
 export type PomoObjType = {

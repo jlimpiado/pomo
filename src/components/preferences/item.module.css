@@ -8,7 +8,7 @@
     color: hsl(var(--red-900))
 }
 
-.container[aria-disabled], .container[aria-disabled] > * {
+.container[aria-disabled="true"], .container[aria-disabled="true"] > * {
     opacity: 0.5;
     cursor: not-allowed;
 }

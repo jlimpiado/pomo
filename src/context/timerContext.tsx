@@ -72,7 +72,7 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
                 if (intervalRef.current !== null) clearInterval(intervalRef.current);
                 break;
         }
-    }, [timerState, isAutoResume])
+    }, [timerState])
 
 
     useEffect(() => {

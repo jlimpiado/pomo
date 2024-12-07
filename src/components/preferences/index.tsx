@@ -22,7 +22,12 @@ const Preferences = (props: PreferencesProps) => {
         isAutoResume,
         setIsAutoResume
     } = useTimerContext();
-    const {pomoLength, setPomoLength} = useUserContext();
+    const {
+        pomoLength,
+        setPomoLength,
+        isNotifEnabled,
+        requestNotifPermission
+    } = useUserContext();
     const {toggleDarkMode, darkMode} = useThemeContext();
 
     useEffect(() => {
@@ -87,10 +92,13 @@ const Preferences = (props: PreferencesProps) => {
         },
         {
             label: "Notifications",
-            defaultValue: false,
+            defaultValue: isNotifEnabled,
             itemType: "switch",
-            onValueChange: (val: boolean) => console.log(val),
-            isDisabled: true
+            onValueChange: () => {
+                if(!isNotifEnabled) requestNotifPermission()
+                else new Notification("You can disable notifications via your browser settings.")
+            },
+            isDisabled: !("Notification" in window)
         },
     ]
 

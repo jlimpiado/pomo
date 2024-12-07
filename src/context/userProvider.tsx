@@ -1,47 +1,91 @@
-import {createContext, FC, useContext, useEffect, useState} from "react";
-import {ProviderChildProps, UserContextType, UserStateType} from "../types.ts";
+import {createContext, FC, useContext, useEffect, useRef, useState} from "react";
+import {ProviderChildProps, UserContextType, UserStateEnum} from "../types.ts";
+
+const notifMessages  = {
+    [UserStateEnum.FOCUS]: "Focus mode!",
+    [UserStateEnum.SHORT_BREAK]: "Time for a short break.",
+    [UserStateEnum.LONG_BREAK]: "Go take a long break.",
+}
 
 const defaultValue: UserContextType = {
-    state: "Focus",
+    state: UserStateEnum.FOCUS,
     setUserStateHandler() {},
     gotoNextState(){},
     increasePomoLength(){},
     decreasePomoLength(){},
-    pomoLength: 0,
-    setPomoLength(){}
+    pomoLength: 1,
+    setPomoLength(){},
+    isNotifEnabled: false,
+    requestNotifPermission(){},
 }
+
 const UserContext = createContext(defaultValue);
 
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider: FC<ProviderChildProps> = ({ children }) => {
-    const [userState, setUserState] = useState<UserStateType>("Focus");
-    const [pomoLength, setPomoLength] = useState(() => 1);
+    const [userState, setUserState] = useState<UserStateEnum>(defaultValue.state);
+    const [pomoLength, setPomoLength] = useState(() => defaultValue.pomoLength);
     const [pomoCount, setPomoCount] = useState(() => 0);
+    const [isNotifEnabled, setIsNotifEnabled] = useState(defaultValue.isNotifEnabled)
+    const notifObj = useRef<Notification | null>(null)
+    const isNotifShowing = useRef(false)
 
     useEffect(() => {
-        if(userState === "Short break") {
+        if(userState === UserStateEnum.SHORT_BREAK) {
             setPomoCount(prev => prev + 1);
         }
 
-        if(userState === "Long break") {
+        if(userState === UserStateEnum.LONG_BREAK) {
             setPomoCount(0);
         }
     }, [userState]);
 
-    const handleSetUserState = (state: UserStateType) => {
+    useEffect(() => {
+        if(Notification.permission === 'granted') setIsNotifEnabled(true)
+    }, []);
+
+    const createNotifInstance = (msg: string) => {
+        const notif = new Notification(msg);
+        notif.addEventListener('show', () => {
+            isNotifShowing.current = true
+        })
+
+        notif.addEventListener('close', () => {
+            isNotifShowing.current = false;
+        })
+        return notif;
+    }
+
+    const requestNotifPermission = () => {
+        Notification.requestPermission().then(permission => {
+            if(permission === 'granted') {
+                setIsNotifEnabled(true)
+            } else if(permission === 'denied') {
+                alert('Notification denied, enable it in your browser settings.')
+            }
+        });
+    }
+
+    const notifUser = (state: UserStateEnum) => {
+        if(isNotifShowing.current) notifObj.current?.close();
+        notifObj.current = createNotifInstance(notifMessages[state])
+    }
+
+    const handleSetUserState = (state: UserStateEnum) => {
         setUserState(state)
     }
 
     const gotoNextState = () => {
         setUserState(prev => {
-            if(prev === "Focus") {
+            let newState = UserStateEnum.FOCUS;
+            if(prev === UserStateEnum.FOCUS) {
                 if(pomoCount >= pomoLength) {
-                    return "Long break"
-                }
-                return "Short break"
+                    newState = UserStateEnum.LONG_BREAK;
+                } else newState = UserStateEnum.SHORT_BREAK;
             }
-            return "Focus"
+            notifUser(newState);
+            return newState
         })
     }
 
@@ -67,7 +111,9 @@ const UserProvider: FC<ProviderChildProps> = ({ children }) => {
             increasePomoLength,
             decreasePomoLength,
             pomoLength,
-            setPomoLength
+            setPomoLength,
+            isNotifEnabled,
+            requestNotifPermission,
         }} >
             {children}
         </UserContext.Provider>
