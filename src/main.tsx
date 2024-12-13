@@ -4,10 +4,12 @@ import './index.css'
 import App from './App.tsx'
 import RootProvider from "./context";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-      <RootProvider>
-          <App />
-      </RootProvider>
-  </StrictMode>,
-)
+window.addEventListener('load', () => {
+    createRoot(document.getElementById('root')!).render(
+        <StrictMode>
+            <RootProvider>
+                <App />
+            </RootProvider>
+        </StrictMode>,
+    )
+})

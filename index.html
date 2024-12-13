@@ -3,8 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/focus.svg" />
+    <link rel="preload" href="/fonts/RobotoFlex.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>POMO</title>
+    <style>
+      @font-face {
+        font-family: "RobotoFlex";
+        src: url('/fonts/RobotoFlex.ttf') format('truetype');
+        font-weight: 400 700;
+        font-display: swap;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
