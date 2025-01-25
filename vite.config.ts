@@ -11,7 +11,6 @@ export default defineConfig({
     },
     include: "**/*.svg"
   })],
-  base: "/pomo/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),

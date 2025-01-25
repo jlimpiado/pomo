@@ -37,6 +37,27 @@ const Timer = () => {
         setSeconds(currentTime % 60);
     }, [currentTime, gotoNextState]);
 
+    useEffect(() => {
+        document.title = isRunning ? `${userState.toUpperCase()} ${formatTime(minutes)}:${formatTime(seconds)}` : "POMO"
+    }, [minutes, seconds, isRunning, userState])
+
+    useEffect(() => {
+        const favicon = document.querySelector("link[rel='icon']") as HTMLLinkElement | undefined;
+        if(!favicon) return;
+        switch (userState) {
+            case "Focus":
+                favicon.href = "/focus.svg";
+                break;
+            case "Short break":
+                favicon.href = "/shortBreak.svg";
+                break;
+            case "Long break":
+                favicon.href = "/longBreak.svg";
+                break;
+        }
+
+    }, [userState])
+
     const resetPomoTime = () => {
         handleSetTimerState('STOP')
         switch (userState) {
