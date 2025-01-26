@@ -36,6 +36,7 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
     const [callbackFn, setCallbackFn] = useState(() => function(){})
     const [isSoundEnabled, setIsSoundEnabled] = useState(defaultValue.isSoundEnabled);
     const [isAutoResume, setIsAutoResume] = useState(defaultValue.isAutoResume);
+    const audioRef = useRef<HTMLAudioElement>(new Audio(alarmAudio));
 
     const handleSetTimerState = (state: TimerStateType) => {
         setTimerState(state)
@@ -77,16 +78,14 @@ const TimerProvider: FC<ProviderChildProps> = ({children}) => {
 
     useEffect(() => {
         const playAlarm = async () => {
-            const audio = new Audio(alarmAudio);
-
             if(!isSoundEnabled) return Promise.resolve();
 
-            const playPromise = audio.play()
+            const playPromise = audioRef.current.play()
             if(playPromise !== undefined) {
               return playPromise.then((_) => {
                 setTimeout(() => {
-                  audio.pause(); // Pauses the audio
-                  audio.currentTime = 0; // Resets playback to the beginning
+                    audioRef.current.pause(); // Pauses the audio
+                    audioRef.current.currentTime = 0; // Resets playback to the beginning
                 }, 3000); // 3 seconds
               });
             }
