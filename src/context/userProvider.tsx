@@ -46,7 +46,7 @@ const UserProvider: FC<ProviderChildProps> = ({ children }) => {
     }, []);
 
     const createNotifInstance = (msg: string) => {
-        try {
+        if("Notification" in window) {
             const notif = new Notification(msg);
             notif.addEventListener('show', () => {
                 isNotifShowing.current = true
@@ -57,10 +57,8 @@ const UserProvider: FC<ProviderChildProps> = ({ children }) => {
             })
 
             return notif;
-        } catch (err) {
-            console.error(err);
-            return null;
         }
+        return null;
     }
 
     const requestNotifPermission = () => {
